@@ -1,0 +1,34 @@
+.navbar {
+	margin: 0;
+	padding: 25px 0;
+}
+
+.navbar-default,
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+	background: none;
+	border: none;
+}
+
+.navbar .navbar-nav {
+	width: 100%;
+}
+
+.navbar-brand,
+.navbar .brand {
+	padding: 0;
+	margin: 0 15px;
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a path {
+	color: #e54545;
+	fill: #e54545;
+}
+.navbar-default .navbar-nav > li.active a,
+.navbar-default .navbar-nav > li.active a path,
+.navbar-default .navbar-nav > li.active > a:hover,
+.navbar-default .navbar-nav > li.active > a:hover path {
+	fill: #555;
+	background: transparent;
+}

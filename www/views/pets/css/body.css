@@ -1,0 +1,19 @@
+
+body {
+	background-image: url(../img/background.png);
+}
+
+
+h3 {
+	color: #e54545;
+}
+
+.vertical-padding {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.img-circle {
+	box-shadow: 2px 2px 3px 2px #999;
+}
+
