@@ -20,7 +20,9 @@ $(JS_DIR)/main.combined.js: $(addprefix $(JS_DIR)/,$(JS_FILES))
 
 install: $(TARGETS)
 	if [ -e /var/www/db/pets.sqlite ]; then chattr -i /var/www/db/pets.sqlite; fi
-	cp --preserve=mode -rf www /var
+	cp --no-preserve=ownership -rf www /var
 	chattr +i /var/www/db/pets.sqlite
 
-	cp --preserve=mode conf/default.conf /etc/nginx/conf.d/
+	chown -R www-data:www-data /var/www/uploads/contato
+
+	cp --no-preserve=ownership conf/default.conf /etc/nginx/conf.d/
