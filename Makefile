@@ -19,7 +19,7 @@ $(JS_DIR)/main.combined.js: $(addprefix $(JS_DIR)/,$(JS_FILES))
 
 
 install: $(TARGETS)
-	[[ -e /var/www/db/pets.sqlite ]] && chattr -i /var/www/db/pets.sqlite
+	if [ -e /var/www/db/pets.sqlite ]; then chattr -i /var/www/db/pets.sqlite; fi
 	cp --preserve=mode -rf www /var
 	chattr +i /var/www/db/pets.sqlite
 
