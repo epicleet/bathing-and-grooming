@@ -48,9 +48,7 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<div class="g-recaptcha" data-sitekey="<?php echo $recaptchaSiteKey; ?>"></div>
-				</div>
+				<div id="recaptcha-send" class="g-recaptcha"></div>
 
 				<!-- Button -->
 				<div class="form-group">
@@ -76,9 +74,7 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<div class="g-recaptcha" data-sitekey="<?php echo $recaptchaSiteKey; ?>"></div>
-				</div>
+				<div id="recaptcha-procedure" class="g-recaptcha"></div>
 
 				<!-- Button -->
 				<div class="form-group">
@@ -91,7 +87,14 @@
 			</fieldset>
 		</form>
 
-		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en"></script>
+		<script type="text/javascript">
+			var CaptchaCallback = function(){
+				grecaptcha.render('recaptcha-send', {'sitekey': '<?php echo $recaptchaSiteKey; ?>'});
+				grecaptcha.render('recaptcha-procedure', {'sitekey': '<?php echo $recaptchaSiteKey; ?>'});
+			};
+		</script>
+
+		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en&amp;onload=CaptchaCallback&amp;render=explicit"></script>
 	</div>
 </div>
 
