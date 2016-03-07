@@ -23,6 +23,6 @@ install: $(TARGETS)
 	cp --no-preserve=ownership -rf www /var
 	chattr +i /var/www/db/pets.sqlite
 
-	chown -R www-data:www-data /var/www/uploads/contato
+	chown -R www-data:www-data /var/www/uploads/contact
 
 	cp --no-preserve=ownership conf/default.conf /etc/nginx/conf.d/
