@@ -7,13 +7,13 @@
 	</div>
 
 	<div class="row">
-		<form action="contact/enviar" method="post" class="form-horizontal col-xs-12 col-sm-6 col-md-7">
+		<form action="contact/send" method="post" class="form-horizontal col-xs-12 col-sm-6 col-md-7">
 			<fieldset>
-				<legend>Precisa de nossos serviços? então preencha o formulário:</legend>
+				<legend>Do you need our services? then fill out this form:</legend>
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="name">Seu name</label>  
+					<label class="col-md-3 control-label" for="name">Your name</label>  
 					<div class="col-md-9">
 						<input id="name" name="name" placeholder="" class="form-control input-md" required="" type="text">
 					</div>
@@ -29,20 +29,20 @@
 
 				<!-- Select Basic -->
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="assunto">Assunto</label>
+					<label class="col-md-3 control-label" for="assunto">Subject</label>
 					<div class="col-md-9">
 						<select id="assunto" name="assunto" class="form-control">
-							<option value="Serviços">Serviços</option>
-							<option value="Dicas">Dicas</option>
-							<option value="Adoções">Adoções</option>
-							<option value="Outros">Outros</option>
+							<option value="Services">Services</option>
+							<option value="Hints">Hints</option>
+							<option value="Adoption">Adoption</option>
+							<option value="Other">Other</option>
 						</select>
 					</div>
 				</div>
 
 				<!-- Textarea -->
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="text">Mensagem</label>
+					<label class="col-md-3 control-label" for="text">Message</label>
 					<div class="col-md-9">                     
 						<textarea class="form-control" id="text" name="text" rows="5"></textarea>
 					</div>
@@ -50,9 +50,9 @@
 
 				<!-- Button -->
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="enviar"></label>
+					<label class="col-md-3 control-label" for="send"></label>
 					<div class="col-md-9">
-						<button id="enviar" name="enviar" data-loading-text="Enviando..." class="btn btn-primary" type="submit">Enviar mensagem</button>
+						<button id="send" name="send" data-loading-text="Sending..." class="btn btn-primary" type="submit">Enviar mensagem</button>
 					</div>
 				</div>
 
@@ -62,21 +62,21 @@
 
 		<form action="contact/procedure" method="post" class="form-horizontal col-xs-12 col-sm-6 col-md-5">
 			<fieldset>
-				<legend>Confira abaixo se seu pet já está atendido:</legend>
+				<legend>Check out if your pet has already been served:</legend>
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="code">Código do pet</label>  
+					<label class="col-md-4 control-label" for="code">Pet's code</label>  
 					<div class="col-md-8">
-						<input id="code" name="code" placeholder="" class="form-control input-md" required="" type="text">
+						<input id="code" name="code" placeholder="" class="form-control input-md" required="" type="number">
 					</div>
 				</div>
 
 				<!-- Button -->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="enviar"></label>
+					<label class="col-md-4 control-label" for="send"></label>
 					<div class="col-md-8">
-						<button id="enviar" name="enviar" data-loading-text="Consultando..." class="btn btn-primary" type="submit">Check</button>
+						<button id="send" name="send" data-loading-text="Checking..." class="btn btn-primary" type="submit">Check</button>
 					</div>
 				</div>
 

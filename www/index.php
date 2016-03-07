@@ -138,7 +138,7 @@ $f3->route('POST /contact/send',
 		if ( !is_dir($folder) )
 			mkdir($folder);
 
-		unset($_POST['enviar']);
+		unset($_POST['send']);
 
 		$h = fopen($folder . $file, 'a+');
 		fwrite($h, print_r($_POST, 1));

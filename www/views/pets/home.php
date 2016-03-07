@@ -12,7 +12,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-md-6">
-			<h3>Adoções</h3>
+			<h3>Adoption</h3>
 			<div><?php echo $pagina['text'] ?></div>
 		</div>
 
