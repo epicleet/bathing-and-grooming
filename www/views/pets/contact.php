@@ -13,7 +13,7 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="name">Your name</label>  
+					<label class="col-md-3 control-label" for="name">Your name</label>
 					<div class="col-md-9">
 						<input id="name" name="name" placeholder="" class="form-control input-md" required="" type="text">
 					</div>
@@ -21,7 +21,7 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="pet">Pet's name</label>  
+					<label class="col-md-3 control-label" for="pet">Pet's name</label>
 					<div class="col-md-9">
 						<input id="pet" name="pet" placeholder="" class="form-control input-md" required="" type="text">
 					</div>
@@ -43,9 +43,13 @@
 				<!-- Textarea -->
 				<div class="form-group">
 					<label class="col-md-3 control-label" for="text">Message</label>
-					<div class="col-md-9">                     
+					<div class="col-md-9">
 						<textarea class="form-control" id="text" name="text" rows="5"></textarea>
 					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="g-recaptcha" data-sitekey="<?php echo $recaptchaSiteKey; ?>"></div>
 				</div>
 
 				<!-- Button -->
@@ -66,10 +70,14 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="code">Pet's code</label>  
+					<label class="col-md-4 control-label" for="code">Pet's code</label>
 					<div class="col-md-8">
 						<input id="code" name="code" placeholder="" class="form-control input-md" required="" type="number">
 					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="g-recaptcha" data-sitekey="<?php echo $recaptchaSiteKey; ?>"></div>
 				</div>
 
 				<!-- Button -->
@@ -82,6 +90,8 @@
 
 			</fieldset>
 		</form>
+
+		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en"></script>
 	</div>
 </div>
 

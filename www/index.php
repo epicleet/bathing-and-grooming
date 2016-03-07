@@ -18,6 +18,9 @@ $f3->set('file', new File());
 // Conexão ao banco de dados
 $f3->set('db', new DB\SQL('sqlite:db/pets.sqlite'));
 
+// ReCaptcha
+$recaptchaSiteKey = '6LcJOBoTAAAAAH-_8HnyYw5QEPtfBlgHfVwhLTm8';
+$recaptchaSecret  = '6LcJOBoTAAAAAFCDNkhAp2bCoUoJdsx-EbGFUcyd';
 
 /**
  * Define as rotas
@@ -93,6 +96,7 @@ $f3->route('GET /contact',
 		$pagina = $f3->db->exec("select name, subtitle, text from pages where url = '{$segments[0]}' limit 1");
 		$f3->set('pagina', reset($pagina));
 
+		$f3->set('recaptchaSiteKey', $recaptchaSiteKey);
 
 		$f3->set('container', "{$segments[0]}.php");
 		echo \View::instance()->render('base.php');
@@ -125,26 +129,33 @@ $f3->route('GET /care/@name',
 	}
 );
 
-
 /**
  * Formulário
  */
 $f3->route('POST /contact/send',
 	function ($f3, $segments)
 	{
-		$file = hash('adler32', $_SERVER['REMOTE_ADDR']);
-		$folder = 'uploads/contact/';
+		$recaptcha = new \ReCaptcha\ReCaptcha($recaptchaSecret);
+		$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
-		if ( !is_dir($folder) )
-			mkdir($folder);
+		if ($resp->isSuccess()) {
+			$file = hash('adler32', $_SERVER['REMOTE_ADDR']);
+			$folder = 'uploads/contact/';
 
-		unset($_POST['send']);
+			if ( !is_dir($folder) )
+				mkdir($folder);
 
-		$h = fopen($folder . $file, 'a+');
-		fwrite($h, print_r($_POST, 1));
-		fclose($h);
+			unset($_POST['send']);
 
-		echo 'Message sent successfuly';
+			$h = fopen($folder . $file, 'a+');
+			fwrite($h, print_r($_POST, 1));
+			fclose($h);
+
+			echo 'Message sent successfuly';
+		}
+		else {
+			$f3->error(403);
+		}
 	}
 );
 
@@ -160,15 +171,23 @@ $f3->route('POST /contact/procedure',
 			header('Location: /contact');
 		}
 
-		$procedure = $f3->db->exec("select name from pets where id = '{$_POST['code']}' and ready = 1 LIMIT 1");
+		$recaptcha = new \ReCaptcha\ReCaptcha($recaptchaSecret);
+		$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
-		if ( !empty($procedure) )
-		{
-			echo substr($procedure[0]['name'], 0, 32) . "\nJob finished.";
+		if ($resp->isSuccess()) {
+			$procedure = $f3->db->exec("select name from pets where id = '{$_POST['code']}' and ready = 1 LIMIT 1");
+
+			if ( !empty($procedure) )
+			{
+				echo substr($procedure[0]['name'], 0, 32) . "\nJob finished.";
+			}
+			else
+			{
+				echo "Hmm... not yet.\nSend us your request... ;)";
+			}
 		}
-		else
-		{
-			echo "Hmm... not yet.\nSend us your request... ;)";
+		else {
+			$f3->error(403);
 		}
 	}
 );
@@ -189,55 +208,3 @@ $f3->set('ONERROR',
  * Ativa a aplicação
  */
 $f3->run();
-
-
-
-
-
-
-
-
-/*
-
-
-$f3->db->exec("insert into requests values ('{$_SERVER['REMOTE_ADDR']}', '{$_SERVER['REQUEST_TIME']}')");
-
-$access_log = $f3->db->exec("select ip, timestamp from requests where ip = '{$_SERVER['REMOTE_ADDR']}' order by timestamp asc");
-
-// if ( empty($access_log) )
-// {
-// 	$f3->db->exec("insert into requests values ('{$_SERVER['REMOTE_ADDR']}', '{$_SERVER['REQUEST_TIME']}')");
-
-// 	include 'routes.php';
-// }
-// else
-// {
-if ( count($access_log) >= 10 )
-{
-	$access_log_first = reset($access_log);
-	$access_log_last = end($access_log);
-
-	if ( $access_log_first['timestamp'] - $access_log_last['timestamp'] < 10 )
-	{
-		$f3->db->exec("delete from requests where ip = '{$_SERVER['REMOTE_ADDR']}' and timestamp = '{$access_log_first['timestamp']}'");
-	}
-	else
-	{
-		
-	}
-
-
-	if ( $_SERVER['REQUEST_TIME'] - $access_log['timestamp'] > 15 )
-	{
-		$f3->db->exec("delete from requests where ip = '{$_SERVER['REMOTE_ADDR']}'");
-		header('Location: ' . $_SERVER['REQUEST_URI']);
-	}
-
-	$f3->route('GET /@pagina',
-		function($f3, $segments)
-		{
-			echo \View::instance()->render('errors/esperando.php');
-		}
-	);
-// }
-*/
