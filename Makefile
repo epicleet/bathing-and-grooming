@@ -16,3 +16,11 @@ $(CSS_DIR)/main.combined.css: $(addprefix $(CSS_DIR)/,$(CSS_FILES))
 
 $(JS_DIR)/main.combined.js: $(addprefix $(JS_DIR)/,$(JS_FILES))
 	cat $? >$@
+
+
+install: $(TARGETS)
+	[[ -e /var/www/db/pets.sqlite ]] && chattr -i /var/www/db/pets.sqlite
+	cp --preserve=mode -rf www /var
+	chattr +i /var/www/db/pets.sqlite
+
+	cp --preserve=mode conf/default.conf /etc/nginx/conf.d/
