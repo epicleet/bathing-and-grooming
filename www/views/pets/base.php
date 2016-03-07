@@ -52,11 +52,11 @@
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
                         <ul class="nav navbar-nav">
                             <li class="<?php echo '/home.php'     == $container ? 'active' : '' ?> col-xs-4 col-xs-offset-4 visible-sm"><a class="brand" href="home"><?php echo file_get_contents(__DIR__ . '/img/brand.svg') ?></a></li>
-                            <li class="<?php echo '/servicos.php' == $container ? 'active' : '' ?> col-xs-6 col-md-2 col-md-offset-1"><a href="servicos">Serviços</a></li>
-                            <li class="<?php echo '/cuidados.php' == $container ? 'active' : '' ?> col-xs-6 col-md-2 "><a href="cuidados">Cuidados</a></li>
+                            <li class="<?php echo '/services.php' == $container ? 'active' : '' ?> col-xs-6 col-md-2 col-md-offset-1"><a href="services">Serviços</a></li>
+                            <li class="<?php echo '/care.php' == $container ? 'active' : '' ?> col-xs-6 col-md-2 "><a href="care">Care</a></li>
                             <li class="<?php echo '/home.php'     == $container ? 'active' : '' ?> col-xs-6 col-md-2 hidden-xs hidden-sm"><a class="brand" href="home"><?php echo file_get_contents(__DIR__ . '/img/brand.svg') ?></a></li>
-                            <li class="<?php echo '/adocoes.php'  == $container ? 'active' : '' ?> col-xs-6 col-md-2 "><a href="adocoes">Adoções</a></li>
-                            <li class="<?php echo '/contato.php'  == $container ? 'active' : '' ?> col-xs-6 col-md-2 "><a href="contato">Contato</a></li>
+                            <li class="<?php echo '/adoption.php'  == $container ? 'active' : '' ?> col-xs-6 col-md-2 "><a href="adoption">Adoções</a></li>
+                            <li class="<?php echo '/contact.php'  == $container ? 'active' : '' ?> col-xs-6 col-md-2 "><a href="contact">Contact</a></li>
                         </ul>
                     </div>
                 </nav>

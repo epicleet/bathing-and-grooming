@@ -22,14 +22,14 @@ $f3->set('db', new DB\SQL('sqlite:db/pets.sqlite'));
 /**
  * Define as rotas
  */
-$f3->route('GET /servicos',
+$f3->route('GET /services',
 	function($f3, $segments)
 	{
-		$pagina = $f3->db->exec("select nome, subtitulo, texto from paginas where url = '{$segments[0]}' limit 1");
+		$pagina = $f3->db->exec("select name, subtitle, text from pages where url = '{$segments[0]}' limit 1");
 		$f3->set('pagina', reset($pagina));
 
-		$servicos = $f3->db->exec("select nome, descricao from servicos");
-		$f3->set('servicos', $servicos);
+		$services = $f3->db->exec("select name, description from services");
+		$f3->set('services', $services);
 
 
 		$f3->set('container', "{$segments[0]}.php");
@@ -37,14 +37,14 @@ $f3->route('GET /servicos',
 	}
 );
 
-$f3->route('GET /cuidados',
+$f3->route('GET /care',
 	function($f3, $segments)
 	{
-		$pagina = $f3->db->exec("select nome, subtitulo, texto from paginas where url = '{$segments[0]}' limit 1");
+		$pagina = $f3->db->exec("select name, subtitle, text from pages where url = '{$segments[0]}' limit 1");
 		$f3->set('pagina', reset($pagina));
 
-		$cuidados = $f3->db->exec("select nome, descricao from cuidados");
-		$f3->set('cuidados', $cuidados);
+		$care = $f3->db->exec("select name, description from care");
+		$f3->set('care', $care);
 
 
 		$f3->set('container', "{$segments[0]}.php");
@@ -55,16 +55,16 @@ $f3->route('GET /cuidados',
 $f3->route('GET /home',
 	function($f3, $segments)
 	{
-		$pagina = $f3->db->exec("select nome, subtitulo, texto from paginas where url = '{$segments[0]}' limit 1");
+		$pagina = $f3->db->exec("select name, subtitle, text from pages where url = '{$segments[0]}' limit 1");
 		$f3->set('pagina', reset($pagina));
 
-		$banners = $f3->db->exec('select nome, imagem from banners order by ordem');
+		$banners = $f3->db->exec('select name, img from banners order by num');
 		$f3->set('banners', $banners);
 
-		$dogs = $f3->db->exec('select nome, foto from adocoes where tipo_animal="dog" order by random() limit 3');
+		$dogs = $f3->db->exec('select name, photo from adoption where animal_kind="dog" order by random() limit 3');
 		$f3->set('dogs', $dogs);
 
-		$cats = $f3->db->exec('select nome, foto from adocoes where tipo_animal="cat" order by random() limit 3');
+		$cats = $f3->db->exec('select name, photo from adoption where animal_kind="cat" order by random() limit 3');
 		$f3->set('cats', $cats);
 
 		$f3->set('container', "{$segments[0]}.php");
@@ -72,14 +72,14 @@ $f3->route('GET /home',
 	}
 );
 
-$f3->route('GET /adocoes',
+$f3->route('GET /adoption',
 	function($f3, $segments)
 	{
-		$pagina = $f3->db->exec("select nome, subtitulo, texto from paginas where url = '{$segments[0]}' limit 1");
+		$pagina = $f3->db->exec("select name, subtitle, text from pages where url = '{$segments[0]}' limit 1");
 		$f3->set('pagina', reset($pagina));
 
-		$adocoes = $f3->db->exec('select nome, foto from adocoes order by id desc');
-		$f3->set('adocoes', $adocoes);
+		$adoption = $f3->db->exec('select name, photo from adoption order by id desc');
+		$f3->set('adoption', $adoption);
 
 
 		$f3->set('container', "{$segments[0]}.php");
@@ -87,10 +87,10 @@ $f3->route('GET /adocoes',
 	}
 );
 
-$f3->route('GET /contato',
+$f3->route('GET /contact',
 	function($f3, $segments)
 	{
-		$pagina = $f3->db->exec("select nome, subtitulo, texto from paginas where url = '{$segments[0]}' limit 1");
+		$pagina = $f3->db->exec("select name, subtitle, text from pages where url = '{$segments[0]}' limit 1");
 		$f3->set('pagina', reset($pagina));
 
 
@@ -103,24 +103,24 @@ $f3->route('GET /contato',
 /**
  * Itens com falhar de SQL Injection
  */
-$f3->route('GET /servicos/@nome',
+$f3->route('GET /services/@name',
 	function($f3, $segments)
 	{
-		$servico = $f3->db->exec("select nome, texto from servicos where nome = ? LIMIT 1", $segments['nome']);
+		$servico = $f3->db->exec("select name, text from services where name = ? LIMIT 1", $segments['name']);
 		$f3->set('servico', reset($servico));
 
-		$f3->set('container', "servicos.descricao.php");
+		$f3->set('container', "services.description.php");
 		echo \View::instance()->render('base.php');
 	}
 );
 
-$f3->route('GET /cuidados/@nome',
+$f3->route('GET /care/@name',
 	function($f3, $segments)
 	{
-		$cuidado = $f3->db->exec("select nome, texto from cuidados where nome = ? LIMIT 1", $segments['nome']);
+		$cuidado = $f3->db->exec("select name, text from care where name = ? LIMIT 1", $segments['name']);
 		$f3->set('cuidado', reset($cuidado));
 
-		$f3->set('container', "cuidados.descricao.php");
+		$f3->set('container', "care.description.php");
 		echo \View::instance()->render('base.php');
 	}
 );
@@ -129,11 +129,11 @@ $f3->route('GET /cuidados/@nome',
 /**
  * Formulário
  */
-$f3->route('POST /contato/enviar',
+$f3->route('POST /contact/send',
 	function ($f3, $segments)
 	{
 		$file = hash('adler32', $_SERVER['REMOTE_ADDR']);
-		$folder = 'uploads/contato/';
+		$folder = 'uploads/contact/';
 
 		if ( !is_dir($folder) )
 			mkdir($folder);
@@ -144,7 +144,7 @@ $f3->route('POST /contato/enviar',
 		fwrite($h, print_r($_POST, 1));
 		fclose($h);
 
-		echo 'Contato enviado com sucesso';
+		echo 'Message sent successfuly';
 	}
 );
 
@@ -152,19 +152,19 @@ $f3->route('POST /contato/enviar',
 /**
  * Formulário
  */
-$f3->route('POST /contato/procedimento',
+$f3->route('POST /contact/procedure',
 	function ($f3, $segments)
 	{
 		if ( !isset($_POST['code']) )
 		{
-			header('Location: /contato');
+			header('Location: /contact');
 		}
 
-		$procedimento = $f3->db->exec("select nome from pets where id = '{$_POST['code']}' and pronto = 1 LIMIT 1");
+		$procedure = $f3->db->exec("select name from pets where id = '{$_POST['code']}' and ready = 1 LIMIT 1");
 
-		if ( !empty($procedimento) )
+		if ( !empty($procedure) )
 		{
-			echo substr($procedimento[0]['nome'], 0, 32) . "\nJob finished.";
+			echo substr($procedure[0]['name'], 0, 32) . "\nJob finished.";
 		}
 		else
 		{

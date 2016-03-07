@@ -3,7 +3,7 @@
 <div id="banner">
 	<div id="owl-banner" class="owl-carousel owl-theme">
 		<?php foreach ($banners as $key => $banner): ?>
-		<div class="item"><img class="lazyOwl" data-src="<?php echo $file->by_pass_cache($banner['imagem']) ?>" alt="<?php echo $banner['nome'] ?>" /></div>
+		<div class="item"><img class="lazyOwl" data-src="<?php echo $file->by_pass_cache($banner['img']) ?>" alt="<?php echo $banner['name'] ?>" /></div>
 		<?php endforeach ?>
 	</div>
 </div>
@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-6">
 			<h3>Adoções</h3>
-			<div><?php echo $pagina['texto'] ?></div>
+			<div><?php echo $pagina['text'] ?></div>
 		</div>
 
 		<div class="col-xs-12 col-md-6">
@@ -25,14 +25,14 @@
 		<div class="col-xs-12 col-md-6">
 			<h3>Cães para Adoção</h3>
 			<?php foreach ($dogs as $pet): ?>
-			<a class="col-xs-4" href="#"><img src="<?php echo $file->by_pass_cache($pet['foto']) ?>" alt="<?php echo $pet['nome'] ?>" class="img-responsive img-circle" /></a>
+			<a class="col-xs-4" href="#"><img src="<?php echo $file->by_pass_cache($pet['photo']) ?>" alt="<?php echo $pet['name'] ?>" class="img-responsive img-circle" /></a>
 			<?php endforeach ?>
 		</div>
 
 		<div class="col-xs-12 col-md-6">
 			<h3>Gatos para Adoção</h3>
 			<?php foreach ($cats as $pet): ?>
-			<a class="col-xs-4" href="#"><img src="<?php echo $file->by_pass_cache($pet['foto']) ?>" alt="<?php echo $pet['nome'] ?>" class="img-responsive img-circle" /></a>
+			<a class="col-xs-4" href="#"><img src="<?php echo $file->by_pass_cache($pet['photo']) ?>" alt="<?php echo $pet['name'] ?>" class="img-responsive img-circle" /></a>
 			<?php endforeach ?>
 		</div>
 	</div>
