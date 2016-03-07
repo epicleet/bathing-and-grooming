@@ -57,6 +57,9 @@ $(function () {
 			.complete( function() {
 				$('[type="submit"]', form).button('reset');
 				form.get(0).reset();
+				var captcha = form.data('captcha');
+				if (captcha && window.grecaptcha)
+					grecaptcha.reset(captcha);
 			});
 	});
 })

@@ -7,7 +7,7 @@
 	</div>
 
 	<div class="row">
-		<form action="contact/send" method="post" class="form-horizontal col-xs-12 col-sm-6 col-md-7">
+		<form id="form-send" action="contact/send" method="post" class="form-horizontal col-xs-12 col-sm-6 col-md-7">
 			<fieldset>
 				<legend>Do you need our services? then fill out this form:</legend>
 
@@ -62,7 +62,7 @@
 		</form>
 
 
-		<form action="contact/procedure" method="post" class="form-horizontal col-xs-12 col-sm-6 col-md-5">
+		<form id="form-procedure" action="contact/procedure" method="post" class="form-horizontal col-xs-12 col-sm-6 col-md-5">
 			<fieldset>
 				<legend>Check out if your pet has already been served:</legend>
 
@@ -89,12 +89,12 @@
 
 		<script type="text/javascript">
 			var CaptchaCallback = function(){
-				grecaptcha.render('recaptcha-send', {'sitekey': '<?php echo $recaptchaSiteKey; ?>'});
-				grecaptcha.render('recaptcha-procedure', {'sitekey': '<?php echo $recaptchaSiteKey; ?>'});
+				$('#form-send').data('captcha', grecaptcha.render('recaptcha-send', {'sitekey': '<?php echo $recaptchaSiteKey; ?>'}));
+				$('#form-procedure').data('captcha', grecaptcha.render('recaptcha-procedure', {'sitekey': '<?php echo $recaptchaSiteKey; ?>'}));
 			};
 		</script>
 
-		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en&amp;onload=CaptchaCallback&amp;render=explicit"></script>
+		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en&amp;onload=CaptchaCallback&amp;render=explicit" async defer></script>
 	</div>
 </div>
 
