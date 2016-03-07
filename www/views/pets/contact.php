@@ -52,7 +52,7 @@
 				<div class="form-group">
 					<label class="col-md-3 control-label" for="send"></label>
 					<div class="col-md-9">
-						<button id="send" name="send" data-loading-text="Sending..." class="btn btn-primary" type="submit">Enviar mensagem</button>
+						<button id="send" name="send" data-loading-text="Sending..." class="btn btn-primary" type="submit">Send message</button>
 					</div>
 				</div>
 
