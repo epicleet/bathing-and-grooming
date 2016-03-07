@@ -19,8 +19,8 @@ $f3->set('file', new File());
 $f3->set('db', new DB\SQL('sqlite:db/pets.sqlite'));
 
 // ReCaptcha
-$recaptchaSiteKey = '6LcJOBoTAAAAAH-_8HnyYw5QEPtfBlgHfVwhLTm8';
-$recaptchaSecret  = '6LcJOBoTAAAAAFCDNkhAp2bCoUoJdsx-EbGFUcyd';
+$f3->set('recaptchaSiteKey', '6LcJOBoTAAAAAH-_8HnyYw5QEPtfBlgHfVwhLTm8');
+$f3->set('recaptcha', new \ReCaptcha\ReCaptcha('6LcJOBoTAAAAAFCDNkhAp2bCoUoJdsx-EbGFUcyd'));
 
 /**
  * Define as rotas
@@ -96,8 +96,6 @@ $f3->route('GET /contact',
 		$pagina = $f3->db->exec("select name, subtitle, text from pages where url = '{$segments[0]}' limit 1");
 		$f3->set('pagina', reset($pagina));
 
-		$f3->set('recaptchaSiteKey', $recaptchaSiteKey);
-
 		$f3->set('container', "{$segments[0]}.php");
 		echo \View::instance()->render('base.php');
 	}
@@ -135,8 +133,7 @@ $f3->route('GET /care/@name',
 $f3->route('POST /contact/send',
 	function ($f3, $segments)
 	{
-		$recaptcha = new \ReCaptcha\ReCaptcha($recaptchaSecret);
-		$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+		$resp = $f3->recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
 		if ($resp->isSuccess()) {
 			$file = hash('adler32', $_SERVER['REMOTE_ADDR']);
@@ -171,8 +168,7 @@ $f3->route('POST /contact/procedure',
 			header('Location: /contact');
 		}
 
-		$recaptcha = new \ReCaptcha\ReCaptcha($recaptchaSecret);
-		$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+		$resp = $f3->recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
 		if ($resp->isSuccess()) {
 			$procedure = $f3->db->exec("select name from pets where id = '{$_POST['code']}' and ready = 1 LIMIT 1");
