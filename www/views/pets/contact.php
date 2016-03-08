@@ -48,7 +48,12 @@
 					</div>
 				</div>
 
-				<div id="recaptcha-send" class="g-recaptcha"></div>
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="recaptcha-send"></label>
+					<div class="col-md-9">
+						<div id="recaptcha-send" class="g-recaptcha"></div>
+					</div>
+				</div>
 
 				<!-- Button -->
 				<div class="form-group">
@@ -74,7 +79,12 @@
 					</div>
 				</div>
 
-				<div id="recaptcha-procedure" class="g-recaptcha"></div>
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="recaptcha-procedure"></label>
+					<div class="col-md-8">
+						<div id="recaptcha-procedure" class="g-recaptcha"></div>
+					</div>
+				</div>
 
 				<!-- Button -->
 				<div class="form-group">
